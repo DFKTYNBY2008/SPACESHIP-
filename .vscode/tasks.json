@@ -6,29 +6,24 @@
             "label": "build SFML",
             "command": "C:\\mingw64-sfml\\bin\\g++.exe",
             "args": [
+                "-std=c++17",
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "${workspaceFolder}\\main_1.cpp",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "-I",
-                "C:\\SFML-2.6.1\\include",
-                "-L",
-                "C:\\SFML-2.6.1\\lib",
+                "${workspaceFolder}\\main_1.exe",
+                "-I", "C:\\SFML-2.6.1\\include",
+                "-L", "C:\\SFML-2.6.1\\lib",
                 "-lsfml-graphics",
                 "-lsfml-window",
                 "-lsfml-system"
             ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": ["$gcc"],
+            "group": { 
                 "kind": "build",
-                "isDefault": true
-            }
+                "isDefault": true }
         }
+        
     ]
 }
