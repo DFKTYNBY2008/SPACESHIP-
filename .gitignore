@@ -1,1 +1,17 @@
 main_1.cpp
+../.vscode/settings.json
+main.exe
+run.exe
+sfml-graphics-2.dll
+sfml-system-2.dll
+sfml-window-2.dll
+../run.exe
+../sftm/openal32.dll
+../sftm/sfml-audio-2.dll
+../sftm/sfml-audio-d-2.dll
+../sftm/sfml-graphics-d-2.dll
+../sftm/sfml-network-2.dll
+../sftm/sfml-network-d-2.dll
+../sftm/sfml-system-d-2.dll
+../sftm/sfml-window-d-2.dll
+sftm
