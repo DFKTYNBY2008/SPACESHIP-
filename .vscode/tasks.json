@@ -1,29 +1,21 @@
 {
-    "version": "2.0.0",
-    "tasks": [
+    "configurations": [
         {
-            "type": "cppbuild",
-            "label": "build SFML",
-            "command": "C:\\mingw64-sfml\\bin\\g++.exe",
-            "args": [
-                "-std=c++17",
-                "-fdiagnostics-color=always",
-                "-g",
-                "${workspaceFolder}\\main_1.cpp",
-                "-o",
-                "${workspaceFolder}\\main_1.exe",
-                "-I", "C:\\SFML-2.6.1\\include",
-                "-L", "C:\\SFML-2.6.1\\lib",
-                "-lsfml-graphics",
-                "-lsfml-window",
-                "-lsfml-system"
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/SFML-2.6.1/include"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
-            "problemMatcher": ["$gcc"],
-            "group": { 
-                "kind": "build",
-                "isDefault": true }
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/MinGW/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
         }
-        
-    ]
+    ],
+    "version": "2.0.0"
 }
