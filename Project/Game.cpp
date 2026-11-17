@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include "Game.h"
 
-void run()
+void Game::run()
 {
     sf::Clock clock;
     while (window.isOpen())
@@ -10,7 +10,7 @@ void run()
         float dt = clock.restart().asSeconds();
 
         sf::Event event;
-        white (window.pollEvent(evwnt))
+        while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
             {
@@ -18,7 +18,7 @@ void run()
             }
         }
         scoreTimer += dt;
-        While (scoreTimer >= 1.f)
+        while (scoreTimer >= 1.f)
         {
             scoreTimer -= 1.f;
             score += 10;
@@ -36,16 +36,16 @@ void run()
 }
 
 
-Game::Game() : window(sf::VideoMode (800, 800), " ")
+Game::Game() : window(sf::VideoMode (1000, 1000), " ")
 {
-    if (!font.LoadFromFile("asswts//font/ttf"))
-    {
-        throw std::runtime_error("asswts//font/ttf not found")
-    }
+if (!font.loadFromFile("font.ttf"))
+{
+    throw std::runtime_error("font.ttf not found");
+}
 
     hudText.setFont(font);
-    hudText.setCharacterSize(20);
-    hudText.setfillColor(sf::Color::White);
+    hudText.setCharacterSize(30);
+    hudText.setFillColor(sf::Color::White);
     hudText.setPosition(10, 10);
 
     field.reset(window.getSize());

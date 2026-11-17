@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
+#include "GameField.h"
+
 class Game
 {
 private:
