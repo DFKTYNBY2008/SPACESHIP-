@@ -8,10 +8,14 @@ class Game
 private:
     sf::RenderWindow window;
     sf::Font font;
-    sf::Text hudText;
+    sf::Text scoreText;
+    sf::Text timeText;
     GameField field;
+
     int score = 0;
-    float scoreTimer = 0.f;
+    float scoreTimer = 0.f; 
+    float Timer = 0.f;
+    
 public:
     Game();
     void run();

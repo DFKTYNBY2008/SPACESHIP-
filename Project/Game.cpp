@@ -1,6 +1,26 @@
 #include <string>
 #include <stdexcept>
 #include "Game.h"
+#include <sstream>
+
+std::string Clock (float Timer_)
+{
+    int seconds = static_cast<int>(Timer_);
+
+        int days = seconds / 86400;
+        int hours = (seconds / 3600) % 24;
+        int minutes = (seconds % 3600) / 60;
+        seconds = seconds % 60;
+
+        std::ostringstream oss;
+        oss << (days < 10 ? "0" : "") << days << ":"
+            << (hours < 10 ? "0" : "") << hours << ":"
+            << (minutes < 10 ? "0" : "") << minutes << ":"
+            << (seconds < 10 ? "0" : "") << seconds;
+
+        return oss.str();
+}
+
 
 void Game::run()
 {
@@ -18,6 +38,7 @@ void Game::run()
             }
         }
         scoreTimer += dt;
+        Timer += dt;
         while (scoreTimer >= 1.f)
         {
             scoreTimer -= 1.f;
@@ -28,8 +49,10 @@ void Game::run()
 
         window.clear(sf::Color(10, 15, 30));
         field.draw(window);
-        hudText.setString("score: " + std::to_string(score));
-        window.draw(hudText);
+        scoreText.setString("score: " + std::to_string(score));
+        timeText.setString("time: " + Clock(Timer));
+        window.draw(scoreText);
+        window.draw(timeText);
         window.display();
     }
             
@@ -43,10 +66,16 @@ if (!font.loadFromFile("font.ttf"))
     throw std::runtime_error("font.ttf not found");
 }
 
-    hudText.setFont(font);
-    hudText.setCharacterSize(30);
-    hudText.setFillColor(sf::Color::White);
-    hudText.setPosition(10, 10);
+    scoreText.setFont(font);
+    scoreText.setCharacterSize(30);
+    scoreText.setFillColor(sf::Color::White);
+    scoreText.setPosition(10, 10);
+    
+    timeText.setFont(font);
+    timeText.setCharacterSize(30);
+    timeText.setFillColor(sf::Color::White);
+    timeText.setPosition(770, 10);
+
 
     field.reset(window.getSize());
 }
