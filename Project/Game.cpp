@@ -69,7 +69,7 @@ if (!font.loadFromFile("font.ttf"))
     timeText.setFont(font);
     timeText.setCharacterSize(30);
     timeText.setFillColor(sf::Color::White);
-    timeText.setPosition(850, 10);
+    timeText.setPosition(830, 10);
 
 
     field.reset(window.getSize());
