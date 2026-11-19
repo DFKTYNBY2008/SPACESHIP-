@@ -3,22 +3,17 @@
 #include "Game.h"
 #include <sstream>
 
-std::string Clock (float Timer_)
+std::string Clock (float timer)
 {
-    int seconds = static_cast<int>(Timer_);
+    int seconds = static_cast<int>(timer);
+    int minutes = (seconds % 3600) / 60;
+    seconds = seconds % 60;
 
-        int days = seconds / 86400;
-        int hours = (seconds / 3600) % 24;
-        int minutes = (seconds % 3600) / 60;
-        seconds = seconds % 60;
+    std::ostringstream oss;
+    oss << (minutes < 10 ? "0" : "") << minutes << ":"
+        << (seconds < 10 ? "0" : "") << seconds;
 
-        std::ostringstream oss;
-        oss << (days < 10 ? "0" : "") << days << ":"
-            << (hours < 10 ? "0" : "") << hours << ":"
-            << (minutes < 10 ? "0" : "") << minutes << ":"
-            << (seconds < 10 ? "0" : "") << seconds;
-
-        return oss.str();
+    return oss.str();
 }
 
 
@@ -74,7 +69,7 @@ if (!font.loadFromFile("font.ttf"))
     timeText.setFont(font);
     timeText.setCharacterSize(30);
     timeText.setFillColor(sf::Color::White);
-    timeText.setPosition(770, 10);
+    timeText.setPosition(850, 10);
 
 
     field.reset(window.getSize());
