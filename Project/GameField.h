@@ -4,7 +4,7 @@
 class GameField
 {
 private:
-    sf::Vector2u size{800, 800};
+    sf::Vector2u size{1000, 1000};
 
 public:
     GameField();
