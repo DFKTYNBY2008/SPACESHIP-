@@ -12,8 +12,7 @@ private:
     sf::Text timeText;
     GameField field;
 
-    int score = 0;
-    float scoreTimer = 0.f; 
+    int score = 0; 
     float Timer = 0.f;
     
 public:

@@ -1,28 +1,69 @@
 #include "GameField.h"
+#include <algorithm>
 
-GameField::GameField()
+void GameField::spawnAsteroid()
 {
-    // генерация рандомного числа, связанного с появленим метеоритов
+    float radius = 30.f;
+    std::uniform_real_distribution<float> newSpeed (100.f, 200.f);
+
+    std::uniform_real_distribution<float> newPosition(radius, size.x - radius);
+    asteroids.emplace_back(newPosition(random), -radius, radius, newSpeed(random));
+}
+
+GameField::GameField() : random(std::random_device{}())
+{
 }
 
 void GameField::reset(sf::Vector2u windowSize)
 {
-    // уничтежение метеоритов, вышетших за пределы 
+    asteroids.clear();
+    spawnTimer = 0.f;
     size = windowSize;
 }
 
 void GameField::update(float dt)
 {
-    // создание новых астероидов
+    spawnTimer += dt;
+    if (spawnTimer > 0.9f)
+    {
+        spawnTimer = 0.f;
+        spawnAsteroid();
+    }
+
+    for (auto& a : asteroids)
+    {
+        a.update(dt);
+    }
+
+    for (int i = 0; i < asteroids.size(); ++i)
+    {
+        if (asteroids[i].isOffScreen(size))
+        {
+            Score += 3;
+            asteroids.erase(asteroids.begin() + i);
+            i--;
+        }
+    };
+   
 }
+
 
 void GameField::draw(sf::RenderTarget &target) const
 {
-    // отрисовка метеоритов и текста
+    for (const auto& a : asteroids)
+    {
+        a.draw(target);
+    }
 }
 
 bool GameField::checkCollision(const sf::FloatRect &rect) const
 {
-    // проверка столкновений
     return false;
+}
+
+int GameField::getScore()
+{
+    int result = Score;
+    Score = 0;
+    return result;
 }

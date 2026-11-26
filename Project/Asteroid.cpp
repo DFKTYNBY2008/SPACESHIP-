@@ -1,11 +1,11 @@
 #include "Asteroid.h"
 
-Asteroids::Asteroids(float x, float y, float radius, float speed)
+Asteroids::Asteroids(float x, float y, float radius, float speed) : speed(speed)
 {
     asteroid.setRadius(radius);
     asteroid.setOrigin(radius, radius);
     asteroid.setPosition(x, y);
-    asteroid.setFillColor(sf::Color(150, 150, 150));
+    asteroid.setFillColor(sf::Color::Green);
 }
 
 void Asteroids::update(float dt)
@@ -28,7 +28,15 @@ float Asteroids::getRadius() const
     return asteroid.getRadius();
 }
 
-bool Asteroids::isOffScreen(float screenHeight) const
+bool Asteroids::isOffScreen(sf::Vector2u fieldSize) const
 {
-    return asteroid.getPosition().y - asteroid.getRadius()>screenHeight;
+    float fieldDelAsteroid = 100.f;
+
+    sf::Vector2f position = asteroid.getPosition();
+    float radius = asteroid.getRadius();
+
+    return position.y - radius > fieldSize.y + fieldDelAsteroid ||
+           position.x - radius > fieldSize.x + fieldDelAsteroid ||
+           position.x + radius < -fieldDelAsteroid ||
+           position.y + radius < -fieldDelAsteroid;
 }
