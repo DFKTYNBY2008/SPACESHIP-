@@ -32,13 +32,8 @@ void Game::run()
                 window.close();
             }
         }
-        scoreTimer += dt;
         Timer += dt;
-        while (scoreTimer >= 1.f)
-        {
-            scoreTimer -= 1.f;
-            score += 10;
-        }
+        score += field.getScore();
         field.update(dt);
         
 
