@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 
 class Ship
 {
@@ -10,5 +11,4 @@ public:
     void reset(sf::Vector2u windowSize);
     void move(float dt, int direction, sf::Vector2u windowSize);
     void draw(sf::RenderTarget& target) const;
-    sf::FloatRect getBounds() const;
 };
