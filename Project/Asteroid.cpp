@@ -7,7 +7,12 @@ Asteroids::Asteroids(float x, float y, float radius, float speed) : speedY(speed
     asteroid.setRadius(radius);
     asteroid.setOrigin(radius, radius);
     asteroid.setPosition(x, y);
-    asteroid.setFillColor(sf::Color::Green);
+    std::uniform_real_distribution<float> ips1 (0, 245);
+    std::uniform_real_distribution<float> ips2 (0, 250);
+    std::uniform_real_distribution<float> ips3 (0, 250);
+    asteroid.setFillColor(sf::Color(ips1(random), ips2(random), ips3(random)));
+    
+
     std::uniform_real_distribution<float> newSpeedX (-50.f, 50.f);
     speedX = newSpeedX(random);
 }

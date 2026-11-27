@@ -2,6 +2,8 @@
 #include <stdexcept>
 #include "Game.h"
 #include <sstream>
+#include "Ship.h"
+
 
 std::string Clock (float timer)
 {
@@ -57,26 +59,51 @@ void Game::run()
             }
             ship.move(dt, direction, window.getSize());
       
-        if (field.checkCollision(ship.getBounds()))
-        {
-            window.close();
-        };
+            if (field.checkCollision(ship.getBounds()))
+            {
+                lives--;
+                field.reset(window.getSize());
+                if (lives == 0)
+                {
+                    game_over = true;
+                };
+            };
         }
    
-
         window.clear(sf::Color(10, 15, 30));
-        field.draw(window);
+        field.draw(window); 
         ship.draw(window);
+
         scoreText.setString("score: " + std::to_string(score));
         timeText.setString("time: " + Clock(Timer));
+        if (lives > 1)
+        {
+            livesText.setString("lives: " + std::to_string(lives));
+        }
+        else 
+        {
+            livesText.setString("live: " + std::to_string(lives));
+        }
         window.draw(scoreText);
         window.draw(timeText);
+        window.draw(livesText);
 
 
-        if (pause)
+        if (game_over)
+        {
+            pause = true;
+           
+        }
+        if (pause && game_over)
+        {
+            endText.setString("Game over!!!");
+            window.draw(endText);
+        }
+        if (pause && !game_over)
         {
             pauseText.setString("PAUSE");
             window.draw(pauseText);
+            ship.reset(window.getSize());
         }
         window.display();
     }
@@ -107,6 +134,15 @@ if (!font.loadFromFile("font.ttf"))
     pauseText.setFillColor(sf::Color::White);
     pauseText.setPosition(350, 430);
 
+    endText.setFont(font);
+    endText.setCharacterSize(100);
+    endText.setFillColor(sf::Color::White);
+    endText.setPosition(220, 410);
+
+    livesText.setFont(font);
+    livesText.setCharacterSize(30);
+    livesText.setFillColor(sf::Color::White);
+    livesText.setPosition(450, 10);
 
     field.reset(window.getSize());
     ship.reset(window.getSize());

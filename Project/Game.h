@@ -12,11 +12,16 @@ private:
     sf::Text scoreText;
     sf::Text timeText;
     sf::Text pauseText;
+    sf::Text endText;
+    sf::Text livesText;
+
     GameField field;
     Ship ship;
 
     bool pause = false;
-    int score = 0; 
+    bool game_over = false;
+    int score = 0;
+    int lives = 3;
     float Timer = 0.f;
     
 public:
