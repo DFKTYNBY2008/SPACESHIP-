@@ -1,16 +1,20 @@
 #include "Asteroid.h"
 
-Asteroids::Asteroids(float x, float y, float radius, float speed) : speed(speed)
+
+
+Asteroids::Asteroids(float x, float y, float radius, float speed) : speedY(speed), random(std::random_device{}())
 {
     asteroid.setRadius(radius);
     asteroid.setOrigin(radius, radius);
     asteroid.setPosition(x, y);
     asteroid.setFillColor(sf::Color::Green);
+    std::uniform_real_distribution<float> newSpeedX (-50.f, 50.f);
+    speedX = newSpeedX(random);
 }
 
 void Asteroids::update(float dt)
 {
-    asteroid.move(0.f, speed * dt);
+    asteroid.move(speedX * dt, speedY * dt);
 }
 
 void Asteroids::draw(sf::RenderTarget &target) const
@@ -39,4 +43,9 @@ bool Asteroids::isOffScreen(sf::Vector2u fieldSize) const
            position.x - radius > fieldSize.x + fieldDelAsteroid ||
            position.x + radius < -fieldDelAsteroid ||
            position.y + radius < -fieldDelAsteroid;
+}
+
+sf::FloatRect Asteroids::getBounds() const
+{
+    return asteroid.getGlobalBounds();
 }

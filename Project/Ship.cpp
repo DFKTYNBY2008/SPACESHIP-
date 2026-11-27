@@ -29,3 +29,7 @@ void Ship::draw(sf::RenderTarget &target) const
     target.draw(ship);
 }
 
+sf::FloatRect Ship::getBounds() const
+{
+    return ship.getGlobalBounds();
+}
