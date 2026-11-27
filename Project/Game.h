@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
 #include "GameField.h"
+#include "Ship.h"
 
 class Game
 {
@@ -11,7 +12,7 @@ private:
     sf::Text scoreText;
     sf::Text timeText;
     GameField field;
-
+    Ship ship;
     int score = 0; 
     float Timer = 0.f;
     

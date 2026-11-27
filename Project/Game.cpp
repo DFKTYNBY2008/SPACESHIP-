@@ -35,10 +35,22 @@ void Game::run()
         Timer += dt;
         score += field.getScore();
         field.update(dt);
+
+        int direction = 0;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            direction = -1;
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            direction = 1;
+        }
+        ship.move(dt, direction, window.getSize());
         
 
         window.clear(sf::Color(10, 15, 30));
         field.draw(window);
+        ship.draw(window);
         scoreText.setString("score: " + std::to_string(score));
         timeText.setString("time: " + Clock(Timer));
         window.draw(scoreText);
@@ -68,4 +80,5 @@ if (!font.loadFromFile("font.ttf"))
 
 
     field.reset(window.getSize());
+    ship.reset(window.getSize());
 }
