@@ -46,6 +46,10 @@ void Game::run()
             direction = 1;
         }
         ship.move(dt, direction, window.getSize());
+        if (field.checkCollision(ship.getBounds()))
+        {
+            window.close();
+        };
         
 
         window.clear(sf::Color(10, 15, 30));

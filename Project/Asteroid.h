@@ -1,11 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <random>
 
 class Asteroids
 {
 private:
     sf::CircleShape asteroid;
-    float speed;
+    float speedY;
+    float speedX;
+    std::mt19937 random;
 
 public:
     Asteroids(float x, float y, float radius,float speed);
@@ -16,4 +19,5 @@ public:
     sf::Vector2f getCenter() const;
     float getRadius() const;
     bool isOffScreen(sf::Vector2u fieldSize) const;
+    sf::FloatRect getBounds() const;
 };
