@@ -31,22 +31,32 @@ void Game::run()
             {
                 window.close();
             }
-        }
-        Timer += dt;
-        score += field.getScore();
-        field.update(dt);
 
-        int direction = 0;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            direction = -1;
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Space)
+                {
+                    pause = !pause;
+                }
+            }
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        if (!pause)
         {
-            direction = 1;
+            Timer += dt;
+            score += field.getScore();
+            field.update(dt);
+
+            int direction = 0;
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            {
+                direction = -1;
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            {
+                direction = 1;
+            }
+            ship.move(dt, direction, window.getSize());
         }
-        ship.move(dt, direction, window.getSize());
-        
 
         window.clear(sf::Color(10, 15, 30));
         field.draw(window);
@@ -55,9 +65,17 @@ void Game::run()
         timeText.setString("time: " + Clock(Timer));
         window.draw(scoreText);
         window.draw(timeText);
+
+
+        if (pause)
+        {
+            pauseText.setString("PAUSE");
+            window.draw(pauseText);
+        }
         window.display();
     }
-            
+    
+    
 }
 
 
@@ -77,6 +95,11 @@ if (!font.loadFromFile("font.ttf"))
     timeText.setCharacterSize(30);
     timeText.setFillColor(sf::Color::White);
     timeText.setPosition(830, 10);
+
+    pauseText.setFont(font);
+    pauseText.setCharacterSize(100);
+    pauseText.setFillColor(sf::Color::White);
+    pauseText.setPosition(350, 430);
 
 
     field.reset(window.getSize());

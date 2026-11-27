@@ -11,8 +11,11 @@ private:
     sf::Font font;
     sf::Text scoreText;
     sf::Text timeText;
+    sf::Text pauseText;
     GameField field;
     Ship ship;
+
+    bool pause = false;
     int score = 0; 
     float Timer = 0.f;
     
